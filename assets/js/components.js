@@ -1,15 +1,29 @@
 /* Shared site components. One header/footer powers every page. */
+
 const BASE = document.body.dataset.base || "";
-const cfg = window.SITE_CONFIG;
+const cfg = window.SITE_CONFIG || {};
+
+/*
+ * Normalise configuration values.
+ *
+ * This allows the project to work whether the config stores
+ * contact details directly or inside contact/social objects.
+ */
+
+const WHATSAPP_NUMBER = cfg.contact?.whatsapp || cfg.whatsapp || "";
+
+const PHONE_NUMBER = cfg.contact?.phone || cfg.phone || "";
+
+const EMAIL_ADDRESS = cfg.contact?.email || cfg.email || "";
+
+const INSTAGRAM_URL = cfg.social?.instagram || cfg.instagram || "#";
+
+const WHATSAPP_URL = WHATSAPP_NUMBER
+  ? `https://wa.me/${String(WHATSAPP_NUMBER).replace(/\D/g, "")}`
+  : "#";
 
 function whatsappUrl() {
-  const number = SITE_CONFIG?.contact?.whatsapp || SITE_CONFIG?.whatsapp || "";
-
-  if (!number) {
-    return "#";
-  }
-
-  return `https://wa.me/${String(number).replace(/\D/g, "")}`;
+  return WHATSAPP_URL;
 }
 function headerHTML() {
   return `
@@ -380,12 +394,12 @@ function headerHTML() {
                 <i class="bi bi-search"></i>
               </button>
 
-              <a
-                href="${SITE_CONFIG.whatsappUrl}"
+             <a
+                href="${whatsappUrl()}"
                 class="header-whatsapp"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
+                >
                 <i class="bi bi-whatsapp"></i>
                 <span>WhatsApp</span>
               </a>
@@ -495,7 +509,22 @@ function mobileMenuHTML() {
     <a href="${BASE}sizing/index.html" class="top-link">Find Your Size</a>
     <a href="${BASE}about.html" class="top-link">About</a>
     <a href="${BASE}contact.html" class="top-link">Contact</a>
-    <div class="mobile-cta"><a href="${whatsappUrl()}" class="btn btn-primary" style="flex:1;justify-content:center">WhatsApp</a><a href="tel:${cfg.phone.replace(/\s/g, "")}" class="btn btn-ghost-ink">Call</a></div>
+    <div class="mobile-cta">
+        <a
+            href="${whatsappUrl()}"
+            class="btn btn-primary"
+            style="flex:1;justify-content:center"
+        >
+            WhatsApp
+        </a>
+
+        <a
+            href="tel:${PHONE_NUMBER.replace(/\s/g, "")}"
+            class="btn btn-ghost-ink"
+        >
+            Call
+        </a>
+    </div>  
   </aside>`;
 }
 
@@ -503,10 +532,10 @@ function footerHTML() {
   return `<section class="final-cta"><div class="container final-cta-inner"><span class="eyebrow">made for your moment</span><h2>Find the set that feels <span class="swipe">like you.</span></h2><p>Choose a ready-to-wear design or create something completely your own.</p><div class="hero-cta" style="justify-content:center"><a href="${BASE}shop.html" class="btn btn-primary">Explore Nails →</a><a href="${whatsappUrl()}" class="btn btn-ghost-ink">Order on WhatsApp</a></div></div></section>
   <section class="newsletter"><div class="container newsletter-inner"><div><h3>Join the YK Nail Club ♡</h3><p>New drops, styling ideas and occasional offers. No unnecessary noise.</p></div><form class="newsletter-form" id="newsletterForm"><input type="email" required placeholder="Your email address" aria-label="Email address"><button type="submit">Join</button></form></div><p class="newsletter-note" id="newsletterNote">No spam. Just pretty nails.</p></section>
   <footer class="site-footer"><div class="container footer-grid">
-    <div class="footer-brand"><a href="${BASE}index.html" class="brand"><span class="brand-mark">YK</span><span class="brand-word">YK Polish Co.<small>HANDCRAFTED PRESS-ONS</small></span></a><p>Your Nails. Your Mood. Your Moment.</p><div class="footer-social"><a href="${cfg.instagram}" target="_blank" rel="noopener" aria-label="Instagram">IG</a><a href="${whatsappUrl()}" aria-label="WhatsApp">WA</a><a href="mailto:${cfg.email}" aria-label="Email">✉</a><a href="tel:${cfg.phone.replace(/\s/g, "")}" aria-label="Phone">☎</a></div></div>
+    <div class="footer-brand"><a href="${BASE}index.html" class="brand"><span class="brand-mark">YK</span><span class="brand-word">YK Polish Co.<small>HANDCRAFTED PRESS-ONS</small></span></a><p>Your Nails. Your Mood. Your Moment.</p><div class="footer-social"><a href="${INSTAGRAM_URL}" target="_blank" rel="noopener" aria-label="Instagram">IG</a><a href="${whatsappUrl()}" aria-label="WhatsApp">WA</a><a href="mailto:${EMAIL_ADDRESS}" aria-label="Email">✉</a><a href="tel:${PHONE_NUMBER.replace(/\s/g, "")}" aria-label="Phone">☎</a></div></div>
     <div class="footer-col"><h6>Shop</h6><ul><li><a href="${BASE}new-arrivals.html">New Arrivals</a></li><li><a href="${BASE}shop.html">All Nails</a></li><li><a href="${BASE}bestsellers.html">Bestsellers</a></li><li><a href="${BASE}collections.html">Collections</a></li><li><a href="${BASE}customised.html">Customised</a></li></ul></div>
     <div class="footer-col"><h6>Help</h6><ul><li><a href="${BASE}sizing/index.html">Find Your Size</a></li><li><a href="${BASE}sizing/size-chart.html">Size Chart</a></li><li><a href="${BASE}sizing/sizing-kit.html">Sizing Kit</a></li><li><a href="${BASE}journal/apply-press-ons.html">Application Guide</a></li><li><a href="${BASE}journal/make-them-last.html">Care & Removal</a></li><li><a href="${BASE}contact.html">Contact</a></li></ul></div>
-    <div class="footer-col"><h6>About</h6><ul><li><a href="${BASE}about.html">Our Story</a></li><li><a href="${BASE}journal/index.html">Nail Journal</a></li><li><a href="${cfg.instagram}" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+    <div class="footer-col"><h6>About</h6><ul><li><a href="${BASE}about.html">Our Story</a></li><li><a href="${BASE}journal/index.html">Nail Journal</a></li><li><a href="${INSTAGRAM_URL}" target="_blank" rel="noopener">Instagram</a></li></ul></div>
     <div class="footer-col"><h6>Policies</h6><ul><li><a href="${BASE}policies/shipping.html">Shipping</a></li><li><a href="${BASE}policies/returns.html">Returns</a></li><li><a href="${BASE}policies/cancellation.html">Cancellation</a></li><li><a href="${BASE}policies/custom-order.html">Custom Orders</a></li><li><a href="${BASE}policies/privacy.html">Privacy</a></li><li><a href="${BASE}policies/terms.html">Terms</a></li></ul></div>
   </div><div class="container footer-bottom"><span>© ${cfg.year} ${cfg.brand}. All Rights Reserved.</span><span>Handcrafted with intention.</span></div></footer><a href="${whatsappUrl()}" class="whatsapp-fab" aria-label="Chat on WhatsApp">WA</a>`;
 }
