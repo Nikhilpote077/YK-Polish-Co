@@ -2,12 +2,15 @@
 const BASE = document.body.dataset.base || "";
 const cfg = window.SITE_CONFIG;
 
-function whatsappUrl(
-  message = "Hi YK Polish Co., I would like to know more about your press-on nails.",
-) {
-  return `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(message)}`;
-}
+function whatsappUrl() {
+  const number = SITE_CONFIG?.contact?.whatsapp || SITE_CONFIG?.whatsapp || "";
 
+  if (!number) {
+    return "#";
+  }
+
+  return `https://wa.me/${String(number).replace(/\D/g, "")}`;
+}
 function headerHTML() {
   return `
     <!-- Announcement Bar -->
