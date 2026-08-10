@@ -115,3 +115,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function setActiveNavigation() {
+  const currentPath =
+    window.location.pathname.replace(/\\/g, "/").split("/").pop() ||
+    "index.html";
+
+  const navLinks = document.querySelectorAll("[data-nav]");
+
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href");
+
+    if (!href) return;
+
+    const linkPage = href.split("/").pop();
+
+    if (
+      (currentPath === "" && linkPage === "index.html") ||
+      currentPath === linkPage
+    ) {
+      link.classList.add("active");
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.classList.remove("active");
+      link.removeAttribute("aria-current");
+    }
+  });
+}
