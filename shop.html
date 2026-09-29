@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop All Press-On Nails — YK Polish Co.</title>
+    <meta name="description" content="Browse all designs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body data-page="shop">
+    <div id="site-header-root"></div>
+
+    <section class="page-hero"><div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> · All Press-On Nails</div>
+      <h1>All Press-On Nails</h1><p>Handcrafted designs for every mood.</p>
+    </div></section>
+    <section class="section"><div class="container"><div class="shop-layout">
+      
+          <aside class="shop-filters" aria-label="Filters">
+            <div class="filter-group"><h4>Style</h4>
+              <label class="filter-option"><input type="checkbox" name="style" value="minimal" /> Minimal</label>
+              <label class="filter-option"><input type="checkbox" name="style" value="french" /> French</label>
+              <label class="filter-option"><input type="checkbox" name="style" value="floral" /> Floral</label>
+              <label class="filter-option"><input type="checkbox" name="style" value="glam" /> Glam</label>
+              <label class="filter-option"><input type="checkbox" name="style" value="cute" /> Cute</label>
+              <label class="filter-option"><input type="checkbox" name="style" value="chrome" /> Chrome</label>
+              <label class="filter-option"><input type="checkbox" name="style" value="glitter" /> Glitter</label>
+            </div>
+            <div class="filter-group"><h4>Colour</h4>
+              <label class="filter-option"><input type="checkbox" name="colour" value="nude" /> Nude</label>
+              <label class="filter-option"><input type="checkbox" name="colour" value="pink" /> Pink</label>
+              <label class="filter-option"><input type="checkbox" name="colour" value="red" /> Red</label>
+              <label class="filter-option"><input type="checkbox" name="colour" value="black" /> Black</label>
+              <label class="filter-option"><input type="checkbox" name="colour" value="blue" /> Blue</label>
+              <label class="filter-option"><input type="checkbox" name="colour" value="green" /> Green</label>
+              <label class="filter-option"><input type="checkbox" name="colour" value="purple" /> Purple</label>
+            </div>
+            <div class="filter-group"><h4>Collection</h4>
+              <label class="filter-option"><input type="checkbox" name="collection" value="bridal" /> Bridal</label>
+              <label class="filter-option"><input type="checkbox" name="collection" value="party" /> Party</label>
+              <label class="filter-option"><input type="checkbox" name="collection" value="everyday" /> Everyday</label>
+              <label class="filter-option"><input type="checkbox" name="collection" value="festive" /> Festive</label>
+              <label class="filter-option"><input type="checkbox" name="collection" value="corporate" /> Corporate</label>
+            </div>
+            <div class="filter-group"><h4>Tags</h4>
+              <label class="filter-option"><input type="checkbox" id="filterNew" /> New arrivals</label>
+              <label class="filter-option"><input type="checkbox" id="filterBest" /> Bestsellers</label>
+            </div>
+            <button type="button" id="clearFilters" class="btn btn-ghost-ink" style="width:100%;justify-content:center;border-color:var(--line);color:var(--text-ink);margin-top:0.5rem;">Clear filters</button>
+          </aside>
+      <div>
+        <div class="shop-toolbar"><span class="count" id="resultCount">Loading…</span>
+          <select id="sortSelect"><option value="featured">Featured</option><option value="new">Newest</option>
+          <option value="price-asc">Price: Low to High</option><option value="price-desc">Price: High to Low</option></select>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </div></div></section>
+  
+    <div id="site-footer-root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/products.js"></script><script src="assets/js/filters.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
