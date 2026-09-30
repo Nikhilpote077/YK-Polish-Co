@@ -3,126 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Press-On Nails — YK Polish Co.</title>
-    <meta
-      name="description"
-      content="Create a personalised press-on nail set with YK Polish Co."
-    />
+    <title>Customised Press-Ons — YK Polish Co.</title>
+    <meta name="description" content="Create a custom set." />
+    <link rel="icon" href="assets/images/favicon/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16.png" />
+    <link rel="apple-touch-icon" href="assets/images/favicon/apple-touch-icon.png" />
     <meta name="theme-color" content="#17131c" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/pages.css" />
   </head>
-  <body data-base="">
+  <body>
     <div id="site-header-root"></div>
-    <main>
-      <section class="page-hero">
-        <div class="container">
-          <span class="eyebrow">made personal</span>
-          <h1>
-            Have a reference? Have a story? Let us make the set around it.
-          </h1>
-          <p>
-            Custom orders are a conversation — your colours, occasion,
-            inspiration and the look you want to create.
-          </p>
-        </div>
-      </section>
-      <section class="section-pad">
-        <div class="container form-layout">
-          <div class="editorial-card">
-            <span class="eyebrow">custom process</span>
-            <h2>Bring us the idea. We will help shape the details.</h2>
-            <p>
-              Share your reference, preferred colours, occasion and timeline. We
-              can then discuss feasibility, sizing and pricing before anything
-              is confirmed.
-            </p>
-          </div>
-          <div class="form-card">
-            <form id="customForm">
-              <div class="form-grid">
-                <div class="field">
-                  <label>Name</label
-                  ><input required name="name" placeholder="Your name" />
-                </div>
-                <div class="field">
-                  <label>WhatsApp / Phone</label
-                  ><input required name="phone" placeholder="+91 ..." />
-                </div>
-                <div class="field full">
-                  <label>Email</label
-                  ><input
-                    type="email"
-                    name="email"
-                    placeholder="you@example.com"
-                  />
-                </div>
-                <div class="field">
-                  <label>Occasion</label
-                  ><select name="occasion">
-                    <option>Bridal</option>
-                    <option>Party</option>
-                    <option>Everyday</option>
-                    <option>Festive</option>
-                    <option>Gift</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label>Preferred budget</label
-                  ><input name="budget" placeholder="e.g. ₹800–₹1200" />
-                </div>
-                <div class="field full">
-                  <label>Tell us about your idea</label
-                  ><textarea
-                    required
-                    name="message"
-                    placeholder="Colours, references, nail shape, event date…"
-                  ></textarea>
-                </div>
-                <div class="field full">
-                  <button class="btn btn-primary" type="submit">
-                    Start my custom enquiry →
-                  </button>
-                </div>
-              </div>
-              <p class="form-note" id="customNote">
-                For the first version, this form prepares your enquiry and opens
-                WhatsApp. We can connect a backend later.
-              </p>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        document
-          .getElementById("customForm")
-          ?.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const d = Object.fromEntries(new FormData(e.currentTarget));
-            const msg = `Custom enquiry\nName: ${d.name}\nPhone: ${d.phone}\nOccasion: ${d.occasion}\nBudget: ${d.budget}\nIdea: ${d.message}`;
-            location.href = `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-          });
-      });
-    </script>
+
+    <section class="page-hero"><div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> · Customised</div>
+      <h1>Customised sets</h1><p>Your colours. Your story. Handcrafted just for you.</p>
+    </div></section>
+    <section class="section"><div class="container prose">
+      <p>Want something that isn’t in the shop? We create custom press-on sets — bridal themes, brand colours, or a design you’ve saved from Instagram.</p>
+      <h2>How it works</h2>
+      <div class="steps" style="margin:1.5rem 0 2rem;">
+        <div class="step"><div><h4>Share your idea</h4><p>Send photos, colour references and occasion details on WhatsApp.</p></div></div>
+        <div class="step"><div><h4>Confirm size &amp; quote</h4><p>We’ll confirm sizes (or recommend the sizing kit) and share timeline + price.</p></div></div>
+        <div class="step"><div><h4>We handcraft your set</h4><p>Made to order. Care notes included with the package.</p></div></div>
+      </div>
+      <p style="margin-top:2rem;"><a href="https://wa.me/910000000000?text=Hi%20YK!%20I%27d%20like%20to%20start%20a%20custom%20order." class="btn btn-primary" target="_blank" rel="noopener">Start on WhatsApp →</a></p>
+    </div></section>
+  
     <div id="site-footer-root"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/config.js"></script>
+    
     <script src="assets/js/components.js"></script>
-    <script src="assets/js/products.js"></script>
-    <script src="assets/js/filters.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
 </html>

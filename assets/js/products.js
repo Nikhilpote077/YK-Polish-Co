@@ -1,177 +1,37 @@
+/* YK Polish Co. — Dummy product catalogue */
 const PRODUCTS = [
-  {
-    id: 1,
-    name: "Rose Veil",
-    slug: "rose-veil",
-    price: 499,
-    styles: ["minimal", "french"],
-    colours: ["nude", "pink"],
-    collection: ["bridal", "minimalist"],
-    badge: "New",
-    isNew: true,
-    isBestseller: false,
-    description: "A soft blush base with a clean, elegant finish.",
-  },
-  {
-    id: 2,
-    name: "Lilac Hour",
-    slug: "lilac-hour",
-    price: 549,
-    styles: ["glam", "chrome"],
-    colours: ["purple"],
-    collection: ["occasion", "statement"],
-    badge: "Bestseller",
-    isNew: false,
-    isBestseller: true,
-    description: "A dreamy lilac set with a subtle reflective finish.",
-  },
-  {
-    id: 3,
-    name: "French Muse",
-    slug: "french-muse",
-    price: 449,
-    styles: ["french", "minimal"],
-    colours: ["nude"],
-    collection: ["everyday", "bridal"],
-    badge: "Everyday",
-    isNew: false,
-    isBestseller: true,
-    description: "A timeless French-inspired set designed for every day.",
-  },
-  {
-    id: 4,
-    name: "Cherry After Dark",
-    slug: "cherry-after-dark",
-    price: 599,
-    styles: ["glam", "statement"],
-    colours: ["red", "black"],
-    collection: ["party", "statement"],
-    badge: "Statement",
-    isNew: true,
-    isBestseller: false,
-    description: "Deep cherry tones for evenings that deserve a little drama.",
-  },
-  {
-    id: 5,
-    name: "Pearl Garden",
-    slug: "pearl-garden",
-    price: 579,
-    styles: ["floral", "bridal"],
-    colours: ["nude", "pink"],
-    collection: ["bridal", "occasion"],
-    badge: "Bridal",
-    isNew: false,
-    isBestseller: true,
-    description: "Delicate floral detailing with a pearl-soft palette.",
-  },
-  {
-    id: 6,
-    name: "Midnight Chrome",
-    slug: "midnight-chrome",
-    price: 649,
-    styles: ["chrome", "glam"],
-    colours: ["black", "purple"],
-    collection: ["party", "statement"],
-    badge: "New",
-    isNew: true,
-    isBestseller: false,
-    description: "A high-shine dark chrome look with a polished edge.",
-  },
-  {
-    id: 7,
-    name: "Petal Milk",
-    slug: "petal-milk",
-    price: 499,
-    styles: ["minimal", "cute"],
-    colours: ["pink", "nude"],
-    collection: ["everyday", "moms-to-be"],
-    badge: "Soft",
-    isNew: false,
-    isBestseller: false,
-    description: "Milky pink with tiny petal details for a soft finish.",
-  },
-  {
-    id: 8,
-    name: "Ocean Glass",
-    slug: "ocean-glass",
-    price: 599,
-    styles: ["chrome", "glitter"],
-    colours: ["blue"],
-    collection: ["vacation", "occasion"],
-    badge: "Vacation",
-    isNew: true,
-    isBestseller: false,
-    description: "Cool blue shimmer inspired by light on water.",
-  },
-  {
-    id: 9,
-    name: "Sage Note",
-    slug: "sage-note",
-    price: 499,
-    styles: ["minimal", "cute"],
-    colours: ["green"],
-    collection: ["everyday", "corporate"],
-    badge: "Minimal",
-    isNew: false,
-    isBestseller: true,
-    description: "A muted sage set for understated, modern styling.",
-  },
-  {
-    id: 10,
-    name: "Golden Hour",
-    slug: "golden-hour",
-    price: 629,
-    styles: ["glam", "glitter"],
-    colours: ["nude", "pink"],
-    collection: ["party", "festive"],
-    badge: "Festive",
-    isNew: true,
-    isBestseller: false,
-    description: "Warm shimmer and soft neutrals made for celebrations.",
-  },
-  {
-    id: 11,
-    name: "Blush Bow",
-    slug: "blush-bow",
-    price: 529,
-    styles: ["cute", "french"],
-    colours: ["pink"],
-    collection: ["college", "gifts"],
-    badge: "Cute",
-    isNew: false,
-    isBestseller: false,
-    description: "A playful blush set with delicate bow-inspired details.",
-  },
-  {
-    id: 12,
-    name: "Ink Petal",
-    slug: "ink-petal",
-    price: 549,
-    styles: ["floral", "statement"],
-    colours: ["black", "pink"],
-    collection: ["occasion", "statement"],
-    badge: "Limited",
-    isNew: true,
-    isBestseller: false,
-    description: "Dark botanical accents balanced with a soft blush base.",
-  },
+  {id:"yk-001",name:"Rose Nude",slug:"rose-nude",price:899,style:"minimal",colour:"nude",collection:["bridal","everyday","minimalist"],isNew:false,isBest:true},
+  {id:"yk-002",name:"Cherry Glaze",slug:"cherry-glaze",price:949,style:"glam",colour:"red",collection:["party","occasion"],isNew:true,isBest:false},
+  {id:"yk-003",name:"Milk French",slug:"milk-french",price:999,style:"french",colour:"nude",collection:["bridal","corporate","everyday"],isNew:false,isBest:true},
+  {id:"yk-004",name:"Lilac Dream",slug:"lilac-dream",price:1099,style:"floral",colour:"purple",collection:["party","vacation","college"],isNew:true,isBest:false},
+  {id:"yk-005",name:"Midnight Chrome",slug:"midnight-chrome",price:1199,style:"chrome",colour:"black",collection:["party","statement","occasion"],isNew:false,isBest:true},
+  {id:"yk-006",name:"Blush Petal",slug:"blush-petal",price:949,style:"cute",colour:"pink",collection:["everyday","college","gifts"],isNew:false,isBest:false},
+  {id:"yk-007",name:"Gold Dust",slug:"gold-dust",price:1149,style:"glitter",colour:"nude",collection:["festive","party","occasion"],isNew:true,isBest:false},
+  {id:"yk-008",name:"Sage Minimal",slug:"sage-minimal",price:899,style:"minimal",colour:"green",collection:["everyday","corporate","minimalist"],isNew:false,isBest:false},
+  {id:"yk-009",name:"Ocean Blue",slug:"ocean-blue",price:999,style:"glam",colour:"blue",collection:["vacation","party"],isNew:false,isBest:false},
+  {id:"yk-010",name:"Bridal Pearl",slug:"bridal-pearl",price:1299,style:"glam",colour:"nude",collection:["bridal","occasion","gifts"],isNew:true,isBest:true},
+  {id:"yk-011",name:"Berry Jam",slug:"berry-jam",price:949,style:"glam",colour:"red",collection:["festive","party"],isNew:false,isBest:false},
+  {id:"yk-012",name:"Cloud White",slug:"cloud-white",price:899,style:"minimal",colour:"nude",collection:["everyday","minimalist","corporate"],isNew:false,isBest:false},
+  {id:"yk-013",name:"Holo Spark",slug:"holo-spark",price:1099,style:"glitter",colour:"pink",collection:["party","college","statement"],isNew:true,isBest:false},
+  {id:"yk-014",name:"Espresso French",slug:"espresso-french",price:999,style:"french",colour:"black",collection:["corporate","everyday","minimalist"],isNew:false,isBest:false},
+  {id:"yk-015",name:"Lavender Mist",slug:"lavender-mist",price:949,style:"minimal",colour:"purple",collection:["everyday","moms-to-be","gifts"],isNew:false,isBest:false},
+  {id:"yk-016",name:"Ruby Chrome",slug:"ruby-chrome",price:1199,style:"chrome",colour:"red",collection:["festive","party","statement"],isNew:false,isBest:true},
 ];
-
-function productArt(product) {
-  const palettes = {
-    pink: ["#f6c5cf", "#c982a2"],
-    purple: ["#d9c9ef", "#8e72c5"],
-    nude: ["#f1ddd0", "#b88978"],
-    red: ["#c33d58", "#641b35"],
-    black: ["#4b4550", "#151219"],
-    blue: ["#a9d5e8", "#4e77a5"],
-    green: ["#c8d8bd", "#6d8562"],
-  };
-  const key = product.colours[0] || "pink";
-  const p = palettes[key];
-  return `<div class="product-art" style="--art-a:${p[0]};--art-b:${p[1]}"><span class="art-nail n1"></span><span class="art-nail n2"></span><span class="art-nail n3"></span><span class="art-nail n4"></span><span class="art-nail n5"></span><small>${product.name}</small></div>`;
+function formatPrice(n){return "₹"+n.toLocaleString("en-IN");}
+function colourClass(c){return({nude:"ph-nude",pink:"ph-pink",red:"ph-red",black:"ph-black",blue:"ph-blue",green:"ph-green",purple:"ph-purple"})[c]||"ph-nude";}
+function productCardHTML(p){
+  const badge=p.isNew?'<span class="badge new">New</span>':(p.isBest?'<span class="badge best">Bestseller</span>':"");
+  const wa=encodeURIComponent('Hi YK Polish Co.! Interested in "'+p.name+'" ('+formatPrice(p.price)+'). Help with sizing & order?');
+  return `<article class="product-card" data-id="${p.id}" data-style="${p.style}" data-colour="${p.colour}" data-price="${p.price}">
+    <div class="media ${colourClass(p.colour)}">${badge}<div class="placeholder"><span>💅</span><small>${p.style}</small></div></div>
+    <div class="body"><div class="name">${p.name}</div><div class="meta">${p.style} · ${p.colour}</div>
+    <div class="price-row"><span class="price">${formatPrice(p.price)}</span>
+    <a class="wa-btn" href="https://wa.me/910000000000?text=${wa}" target="_blank" rel="noopener">WhatsApp</a></div></div></article>`;
 }
-
-function productCard(product) {
-  return `<article class="product-card" data-product-id="${product.id}"><a href="${document.body.dataset.base || ""}shop.html?product=${product.slug}" class="product-link" aria-label="View ${product.name}">${product.badge ? `<span class="product-badge">${product.badge}</span>` : ""}${productArt(product)}<div class="product-info"><div><h3>${product.name}</h3><p>${product.description}</p></div><strong>${SITE_CONFIG.currency}${product.price}</strong></div></a><a class="product-order" href="https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent("Hi, I am interested in " + product.name + ". Please share details.")}">Order via WhatsApp →</a></article>`;
+function renderProducts(list,id){
+  const el=document.getElementById(id); if(!el)return;
+  if(!list.length){el.innerHTML='<div class="empty-state"><div class="emoji">💅</div><p>No designs match your filters.</p></div>';return;}
+  el.innerHTML=list.map(productCardHTML).join("");
 }
+window.YK=window.YK||{};
+window.YK.PRODUCTS=PRODUCTS;window.YK.formatPrice=formatPrice;window.YK.productCardHTML=productCardHTML;window.YK.renderProducts=renderProducts;

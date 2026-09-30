@@ -1,144 +1,96 @@
+/* ==========================================================================
+   YK Polish Co. — main.js
+   Handles: announcement ticker loop, sticky header shadow, mega menus,
+   mobile drawer + accordions. No frameworks — vanilla JS.
+   ========================================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 1. Announcement bar: duplicate track for a seamless loop ---- */
   const track = document.getElementById("announceTrack");
-  if (track) track.innerHTML += track.innerHTML;
+  if (track) {
+    track.innerHTML += track.innerHTML; // duplicate content once for seamless -50% scroll
+  }
+
+  /* ---- 2. Sticky header shadow on scroll ---- */
   const header = document.getElementById("siteHeader");
-  const onScroll = () =>
-    header?.classList.toggle("is-scrolled", window.scrollY > 12);
+  const onScroll = () => {
+    if (window.scrollY > 12) header.classList.add("is-scrolled");
+    else header.classList.remove("is-scrolled");
+  };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  /* ---- 3. Desktop mega menus (click to open, click outside/escape to close) ---- */
   const navItems = document.querySelectorAll(".nav-item");
-  const closeMegas = (except = null) =>
+
+  function closeAllMegas(except) {
     navItems.forEach((item) => {
       if (item !== except) {
         item.classList.remove("is-open");
-        item
-          .querySelector(".nav-link-btn")
-          ?.setAttribute("aria-expanded", "false");
+        const btn = item.querySelector(".nav-link-btn");
+        if (btn) btn.setAttribute("aria-expanded", "false");
       }
     });
-  navItems.forEach((item) => {
-    const btn = item.querySelector(".nav-link-btn");
-    btn?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const open = item.classList.contains("is-open");
-      closeMegas(item);
-      item.classList.toggle("is-open", !open);
-      btn.setAttribute("aria-expanded", String(!open));
-    });
-  });
-  document.addEventListener("click", () => closeMegas());
-
-  const burger = document.getElementById("burgerBtn"),
-    menu = document.getElementById("mobileMenu"),
-    overlay = document.getElementById("mobileOverlay"),
-    close = document.getElementById("mobileCloseBtn");
-  const closeMobile = () => {
-    menu?.classList.remove("is-open");
-    overlay?.classList.remove("is-open");
-    menu?.setAttribute("aria-hidden", "true");
-    burger?.setAttribute("aria-expanded", "false");
-    document.body.style.overflow = "";
-  };
-  const openMobile = () => {
-    menu?.classList.add("is-open");
-    overlay?.classList.add("is-open");
-    menu?.setAttribute("aria-hidden", "false");
-    burger?.setAttribute("aria-expanded", "true");
-    document.body.style.overflow = "hidden";
-  };
-  burger?.addEventListener("click", openMobile);
-  close?.addEventListener("click", closeMobile);
-  overlay?.addEventListener("click", closeMobile);
-  document
-    .querySelectorAll(".mobile-menu .accordion-trigger")
-    .forEach((t) =>
-      t.addEventListener("click", () =>
-        t.closest(".accordion-item")?.classList.toggle("is-open"),
-      ),
-    );
-
-  const path = location.pathname.replace(/\\/g, "/");
-  let key = "home";
-  if (path.endsWith("/shop.html")) key = "shop";
-  else if (path.endsWith("/new-arrivals.html")) key = "new";
-  else if (path.endsWith("/bestsellers.html")) key = "best";
-  else if (path.endsWith("/collections.html")) key = "collections";
-  else if (path.endsWith("/customised.html")) key = "custom";
-  else if (path.includes("/sizing/")) key = "sizing";
-  else if (path.endsWith("/about.html")) key = "about";
-  else if (path.endsWith("/contact.html")) key = "contact";
-  else if (path.includes("/journal/")) key = "journal";
-  document
-    .querySelectorAll("[data-nav]")
-    .forEach((a) => a.classList.toggle("is-active", a.dataset.nav === key));
-
-  const searchBtn = document.getElementById("searchBtn"),
-    panel = document.getElementById("searchPanel"),
-    searchClose = document.getElementById("searchClose"),
-    input = document.getElementById("siteSearchInput");
-  const openSearch = () => {
-    if (panel) {
-      panel.hidden = false;
-      searchBtn?.setAttribute("aria-expanded", "true");
-      setTimeout(() => input?.focus(), 20);
-    }
-  };
-  const closeSearch = () => {
-    if (panel) {
-      panel.hidden = true;
-      searchBtn?.setAttribute("aria-expanded", "false");
-    }
-  };
-  searchBtn?.addEventListener("click", openSearch);
-  searchClose?.addEventListener("click", closeSearch);
-  document.getElementById("siteSearchForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const q = input.value.trim();
-    if (q) location.href = `${BASE_URL()}shop.html?q=${encodeURIComponent(q)}`;
-  });
-  function BASE_URL() {
-    return document.body.dataset.base || "";
   }
 
-  document.getElementById("newsletterForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const note = document.getElementById("newsletterNote");
-    if (note) note.textContent = "You are on the list ♡";
-    e.currentTarget.reset();
+  navItems.forEach((item) => {
+    const btn = item.querySelector(".nav-link-btn");
+    if (!btn) return;
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = item.classList.contains("is-open");
+      closeAllMegas(item);
+      item.classList.toggle("is-open", !isOpen);
+      btn.setAttribute("aria-expanded", String(!isOpen));
+    });
   });
+
+  document.addEventListener("click", () => closeAllMegas());
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeMegas();
-      closeMobile();
-      closeSearch();
-    }
+    if (e.key === "Escape") closeAllMegas();
   });
+
+  /* ---- 4. Mobile menu drawer ---- */
+  const burgerBtn = document.getElementById("burgerBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const mobileOverlay = document.getElementById("mobileOverlay");
+  const mobileCloseBtn = document.getElementById("mobileCloseBtn");
+
+  function openMobileMenu() {
+    mobileMenu.classList.add("is-open");
+    mobileOverlay.classList.add("is-open");
+    mobileMenu.setAttribute("aria-hidden", "false");
+    burgerBtn.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+  }
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("is-open");
+    mobileOverlay.classList.remove("is-open");
+    mobileMenu.setAttribute("aria-hidden", "true");
+    burgerBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
+  burgerBtn?.addEventListener("click", openMobileMenu);
+  mobileCloseBtn?.addEventListener("click", closeMobileMenu);
+  mobileOverlay?.addEventListener("click", closeMobileMenu);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMobileMenu();
+  });
+
+  /* ---- 5. Mobile accordions (Shop / Collections) ---- */
+  document
+    .querySelectorAll(".mobile-menu .accordion-trigger")
+    .forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        trigger.closest(".accordion-item").classList.toggle("is-open");
+      });
+    });
 });
 
-function setActiveNavigation() {
-  const currentPath =
-    window.location.pathname.replace(/\\/g, "/").split("/").pop() ||
-    "index.html";
-
-  const navLinks = document.querySelectorAll("[data-nav]");
-
-  navLinks.forEach((link) => {
-    const href = link.getAttribute("href");
-
-    if (!href) return;
-
-    const linkPage = href.split("/").pop();
-
-    if (
-      (currentPath === "" && linkPage === "index.html") ||
-      currentPath === linkPage
-    ) {
-      link.classList.add("active");
-      link.setAttribute("aria-current", "page");
-    } else {
-      link.classList.remove("active");
-      link.removeAttribute("aria-current");
-    }
-  });
-}
+/* ---- Page loader: hide once everything has loaded (min. 400ms so the logo is seen) ---- */
+(function () {
+  const hideLoader = () => setTimeout(() => document.body.classList.add("is-loaded"), 400);
+  if (document.readyState === "complete") hideLoader();
+  else window.addEventListener("load", hideLoader);
+})();

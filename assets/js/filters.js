@@ -1,67 +1,39 @@
-function getFilters() {
-  const p = new URLSearchParams(location.search);
-  return {
-    style: p.get("style") || "",
-    colour: p.get("colour") || "",
-    q: (p.get("q") || "").toLowerCase(),
-    collection: p.get("collection") || "",
-    sort: p.get("sort") || "featured",
-  };
-}
-function applyProductFilters(items, filters) {
-  let out = items.filter(
-    (x) =>
-      (!filters.style || x.styles.includes(filters.style)) &&
-      (!filters.colour || x.colours.includes(filters.colour)) &&
-      (!filters.collection || x.collection.includes(filters.collection)) &&
-      (!filters.q ||
-        [x.name, x.description, ...x.styles, ...x.colours, ...x.collection]
-          .join(" ")
-          .toLowerCase()
-          .includes(filters.q)),
-  );
-  if (filters.sort === "price-low") out.sort((a, b) => a.price - b.price);
-  if (filters.sort === "price-high") out.sort((a, b) => b.price - a.price);
-  if (filters.sort === "new")
-    out.sort((a, b) => Number(b.isNew) - Number(a.isNew));
-  return out;
-}
-function renderProducts(target, items) {
-  const el = document.querySelector(target);
-  if (!el) return;
-  el.innerHTML = items.length
-    ? items.map(productCard).join("")
-    : `<div class="empty-state"><h3>No sets found</h3><p>Try another style, colour or search term.</p><a class="btn btn-primary" href="shop.html">View all designs</a></div>`;
-}
-function initShop() {
-  const grid = document.querySelector("[data-product-grid]");
-  if (!grid) return;
-  const filters = getFilters();
-  let items = applyProductFilters(PRODUCTS, filters);
-  const sort = document.querySelector("#sortProducts");
-  if (sort) {
-    sort.value = filters.sort;
-    sort.addEventListener("change", () => {
-      const p = new URLSearchParams(location.search);
-      p.set("sort", sort.value);
-      location.search = p.toString();
-    });
+document.addEventListener("DOMContentLoaded",()=>{
+  const grid=document.getElementById("productGrid");
+  if(!grid||!window.YK||!window.YK.PRODUCTS)return;
+  const PRODUCTS=window.YK.PRODUCTS;
+  const params=new URLSearchParams(window.location.search);
+  function getChecked(name){return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el=>el.value);}
+  function applyFilters(){
+    let list=[...PRODUCTS];
+    const styles=getChecked("style"),colours=getChecked("colour"),collections=getChecked("collection");
+    const onlyNew=document.getElementById("filterNew")?.checked;
+    const onlyBest=document.getElementById("filterBest")?.checked;
+    const sort=document.getElementById("sortSelect")?.value||"featured";
+    if(styles.length)list=list.filter(p=>styles.includes(p.style));
+    if(colours.length)list=list.filter(p=>colours.includes(p.colour));
+    if(collections.length)list=list.filter(p=>p.collection.some(c=>collections.includes(c)));
+    if(onlyNew)list=list.filter(p=>p.isNew);
+    if(onlyBest)list=list.filter(p=>p.isBest);
+    if(sort==="price-asc")list.sort((a,b)=>a.price-b.price);
+    else if(sort==="price-desc")list.sort((a,b)=>b.price-a.price);
+    else if(sort==="name")list.sort((a,b)=>a.name.localeCompare(b.name));
+    else if(sort==="new")list.sort((a,b)=>(b.isNew?1:0)-(a.isNew?1:0));
+    window.YK.renderProducts(list,"productGrid");
+    const countEl=document.getElementById("resultCount");
+    if(countEl)countEl.textContent=list.length===PRODUCTS.length?`Showing all ${list.length} designs`:`Showing ${list.length} of ${PRODUCTS.length} designs`;
   }
-  document
-    .querySelector("[data-results-count]")
-    ?.replaceChildren(
-      document.createTextNode(
-        `${items.length} ${items.length === 1 ? "design" : "designs"}`,
-      ),
-    );
-  renderProducts("[data-product-grid]", items);
-  document.querySelectorAll("[data-filter-link]").forEach((a) => {
-    const u = new URL(a.href);
-    if (
-      filters.style === u.searchParams.get("style") ||
-      filters.colour === u.searchParams.get("colour")
-    )
-      a.classList.add("is-selected");
+  document.querySelectorAll(".shop-filters input, #sortSelect").forEach(el=>el.addEventListener("change",applyFilters));
+  const urlStyle=params.get("style"),urlColour=params.get("colour"),urlCollection=params.get("collection");
+  if(urlStyle){const cb=document.querySelector(`input[name="style"][value="${urlStyle}"]`);if(cb)cb.checked=true;}
+  if(urlColour){const cb=document.querySelector(`input[name="colour"][value="${urlColour}"]`);if(cb)cb.checked=true;}
+  if(urlCollection){const cb=document.querySelector(`input[name="collection"][value="${urlCollection}"]`);if(cb)cb.checked=true;}
+  const pageType=document.body.dataset.page;
+  if(pageType==="new-arrivals"){const o=document.getElementById("filterNew");if(o)o.checked=true;}
+  if(pageType==="bestsellers"){const o=document.getElementById("filterBest");if(o)o.checked=true;}
+  applyFilters();
+  document.getElementById("clearFilters")?.addEventListener("click",()=>{
+    document.querySelectorAll(".shop-filters input[type=checkbox]").forEach(c=>c.checked=false);
+    const s=document.getElementById("sortSelect");if(s)s.value="featured";applyFilters();
   });
-}
-document.addEventListener("DOMContentLoaded", initShop);
+});
